@@ -1,9 +1,6 @@
-// Plan: For the list filtering we'll use ingredients and code it.
-// We will utilize the api's search query to get new recipes.
-// Essentially we have two search bars, format as we please.
-// We will also get the recipe card because it looks nice. 
-
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import './App.css';
 
 const API_KEY = import.meta.env.VITE_APP_API_KEY;
@@ -83,6 +80,7 @@ function App() {
         <p>Average Health Score: {summaryStats.avgHealthScore.toFixed(2)}</p>
         <p>Vegetarian Recipes: {summaryStats.vegetarianCount}</p>
       </div>
+
       <div className="search-filter">
         <input
           type="text"
@@ -93,6 +91,44 @@ function App() {
         <button onClick={() => filterByTag('vegetarian')}>Vegetarian</button>
         <button onClick={() => filterByTag('dessert')}>Dessert</button>
       </div>
+
+      <div className="chart-container">
+        <div className="chart">
+          <BarChart
+            width={600}
+            height={300}
+            data={recipes}
+            margin={{
+              top: 5, right: 30, left: 20, bottom: 5,
+            }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="title" />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Bar dataKey="healthScore" fill="#8884d8" />
+          </BarChart>
+        </div>
+        <div className="chart">
+          <BarChart
+            width={600}
+            height={300}
+            data={recipes}
+            margin={{
+              top: 5, right: 30, left: 20, bottom: 5,
+            }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="title" />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Bar dataKey="readyInMinutes" fill="#82ca9d" />
+          </BarChart>
+        </div>
+      </div>
+
       <div className="recipe-list">
         {filteredResults.map((recipe) => (
           <div key={recipe.id} className="recipe-card">
@@ -101,6 +137,7 @@ function App() {
             <p>Health Score: {recipe.healthScore || 'N/A'}</p>
             <p>Vegetarian: {recipe.vegetarian ? 'Yes' : 'No'}</p>
             <img src={recipe.image} alt={recipe.title} />
+            <Link to={`/recipeDetails/${recipe.id}`}>View Details</Link>
           </div>
         ))}
       </div>

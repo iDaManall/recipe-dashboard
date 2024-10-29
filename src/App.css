@@ -89,3 +89,35 @@ h1 {
   color: #6c757d;
   margin: 5px 0;
 }
+
+nav {
+  position: fixed; 
+  top: 0; 
+  right: 0; 
+}
+
+.home-link {
+  border: 1px solid #1d1f1d; /* Change border to solid and match background color */
+  background: #1d1f1d; /* Dark background color */
+  color: white; /* White text color for contrast */
+  width: 75px;
+  padding: 5px 10px; /* Add padding for better spacing */
+  text-align: center; /* Center the text */
+  text-decoration: none; /* Remove underline from link */
+  display: inline-block; /* Ensure it behaves like a button */
+  border-radius: 5px; /* Add rounded corners */
+  transition: background 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.home-link:hover {
+  background: #333; /* Slightly lighter background on hover */
+}
+
+.chart-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px; /* Add some space between the charts */
+  margin-top: 20px;
+  align-items: center;
+  margin-top: 20px;
+}
